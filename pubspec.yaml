@@ -2,7 +2,7 @@ name: sentry_experiment
 description: A new Flutter project.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ">=3.0.3 <4.0.0"
@@ -31,7 +31,6 @@ sentry:
   org: experiment-0v
   auth_token: de6204634e484e5daa6a935cc67831a21cba74a3aba54f9182a4497ca5d1ec15
   url: https://697d64dbdae4493c8a0254a3b469be53@o4505358017101824.ingest.sentry.io
-  # release: sentry-exp@1.0.0+1
   wait_for_processing: true
   log_level: trace # SENTRY_LOG_LEVEL error # possible values: trace, debug, info, warn, error
   web_build_path: build/web

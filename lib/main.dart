@@ -1,7 +1,20 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:sentry_flutter/sentry_flutter.dart';
+
+Future<void> main() async {
+  await SentryFlutter.init(
+    (options) {
+      options.dsn = 'https://697d64dbdae4493c8a0254a3b469be53@o4505358017101824.ingest.sentry.io/4505358018215936';
+      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+      // We recommend adjusting this value in production.
+      options.tracesSampleRate = 1.0;
+    },
+    appRunner: () => runApp(const MyApp()),
+  );
+
+  // or define SENTRY_DSN via Dart environment variable (--dart-define)
 }
 
 class MyApp extends StatelessWidget {
@@ -115,10 +128,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: one,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => reportAndRethrow(one),
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -127,3 +140,15 @@ class _MyHomePageState extends State<MyHomePage> {
 void one() => two();
 void two() => three();
 void three() => throw Exception('oops');
+
+void reportAndRethrow(FutureOr Function() fn) async {
+  try {
+    fn();
+  } catch (exception, stackTrace) {
+    debugPrint(stackTrace.toString());
+    await Sentry.captureException(
+      exception,
+      stackTrace: stackTrace,
+    );
+  }
+}

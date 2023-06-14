@@ -10,7 +10,7 @@ Future<void> main() async {
       // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
       // We recommend adjusting this value in production.
       options.tracesSampleRate = 1.0;
-      options.release = "1.0.0+1";
+      options.release = "1.0.0+3";
     },
     appRunner: () => runApp(const MyApp()),
   );

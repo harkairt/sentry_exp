@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-const release = "1.0.0+6";
+const release = "sentry-exp@1.0.0+7";
 
 Future<void> main() async {
   await SentryFlutter.init(

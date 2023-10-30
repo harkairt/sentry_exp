@@ -13,6 +13,7 @@ Future<void> main() async {
       // We recommend adjusting this value in production.
       options.tracesSampleRate = 1.0;
       options.release = release;
+      options.dist = release;
     },
     appRunner: () => runApp(const MyApp()),
   );
